@@ -6,8 +6,9 @@ SUBDIRS += \
     $$PWD/LQInstrumentation/LQInstrumentation.pro \
     $$PWD/LQFormWidget/LQFormWidget.pro \
     $$PWD/LQChart/LQChart.pro \
-    $$PWD/LQTools/LQTools.pro    \
+    $$PWD/LQTools/LQTools.pro \
     $$PWD/Exmaple/Exmaple.pro
 
 CONFIG  +=ordered
 
+OTHER_FILES = appveyor.yml

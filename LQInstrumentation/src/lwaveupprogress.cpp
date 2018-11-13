@@ -55,7 +55,7 @@ void LWaveUpProgress::drawValue(QPainter *painter)
     int width = this->width ();
     int side = qMin(height,width);
 
-    //起始坐标和结束坐标
+    //起始坐标和结束坐标  
     int startX = d_ptr->borderWidth;
     int startY = d_ptr->borderWidth;
     int endX = width - d_ptr->borderWidth;
@@ -69,29 +69,29 @@ void LWaveUpProgress::drawValue(QPainter *painter)
         endY = (height + side) / 2;
     }
 
-    //计算当前值所占百分比
+    //计算当前值所占百分比  
     double percent = 1 - (double)(d_ptr->value - d_ptr->minValue)/
             (d_ptr->maxValue - d_ptr->minValue);
     //正弦曲线公式 y = A * sin(ωx + φ) + k
-    //w 表示周期，可以理解为水波的密度，值越大密度越大
+    //w 表示周期，可以理解为水波的密度，值越大密度越大  
     double w = d_ptr->waterDensity * M_PI / endX;
 
-    //A 表示振幅,可以理解为水波的高度
+    //A 表示振幅,可以理解为水波的高度  
     double A = endY * d_ptr->waterHeight;
 
-    //K表示y轴偏移，可以理解为进度，取值高度的进度百分比
+    //K表示y轴偏移，可以理解为进度，取值高度的进度百分比  
     double k = endY * percent;
 
-    //重新计算图形区域
+    //重新计算图形区域  
     if ( d_ptr->percentStyle == percentStyleCircle){
         k = (side * percent) + startY;
     }
 
-    //第一条和第二条波浪路径集合
+    //第一条和第二条波浪路径集合  
     QPainterPath waterPath1;
     QPainterPath waterPath2;
 
-    //移动到左上角起始点
+    //移动到左上角起始点  
     waterPath1.moveTo (startX,endY);
     waterPath2.moveTo (startX,endY);
 
@@ -101,33 +101,33 @@ void LWaveUpProgress::drawValue(QPainter *painter)
     }
 
     for (int x = startX; x <= endX; x++){
-        //第一条波浪Y轴
+        //第一条波浪Y轴  
         double waterY1 = (double)(A * sin(w * x + d_ptr->offset)) + k;
-        //第二条波浪线Y轴
+        //第二条波浪线Y轴  
         double waterY2 = (double)(A * sin(w * x + d_ptr->offset + (endX / 2 * w))) + k;
 
-        //如果当前值为最小值,则Y轴为右下角Y轴
+        //如果当前值为最小值,则Y轴为右下角Y轴  
         if (d_ptr->value == d_ptr->minValue){
             waterY1 = endY;
             waterY2 = endY;
         }
 
-        //如果当前值为最大值,则Y轴为右上角Y轴
+        //如果当前值为最大值,则Y轴为右上角Y轴  
         if (d_ptr->value == d_ptr->maxValue){
             waterY1 = startY;
             waterY2 = startY;
         }
 
-        //将两个点连接成线
+        //将两个点连接成线  
         waterPath1.lineTo (x,waterY1);
         waterPath2.lineTo (x,waterY2);
     }
 
-    //移动到右下角结束点，整体形成一个闭合路径
+    //移动到右下角结束点，整体形成一个闭合路径  
     waterPath1.lineTo (endX,endY);
     waterPath2.lineTo (endX,endY);
 
-    //大路径
+    //大路径  
     QPainterPath bigPath;
     if (d_ptr->percentStyle == percentStyleRect){
         bigPath.addRect (startX,startY,endX,endY);
@@ -138,7 +138,7 @@ void LWaveUpProgress::drawValue(QPainter *painter)
                             height - d_ptr->borderWidth * 2);
     }
 
-    //新路径，用大路径减去波浪区域的路径，形成遮罩效果
+    //新路径，用大路径减去波浪区域的路径，形成遮罩效果  
     QPainterPath path;
     QColor waterColor1 = d_ptr->usedColr;
     waterColor1.setAlpha (100);
@@ -148,12 +148,12 @@ void LWaveUpProgress::drawValue(QPainter *painter)
     painter->save ();
     painter->setPen (Qt::NoPen);
 
-    //第一条波浪挖去后的路径
+    //第一条波浪挖去后的路径  
     path = bigPath.intersected (waterPath1);
     painter->setBrush (waterColor1);
     painter->drawPath (path);
 
-    //第二条波浪挖去后的路径
+    //第二条波浪挖去后的路径  
     path = bigPath.intersected (waterPath2);
     painter->setBrush (waterColor2);
     painter->drawPath (path);
@@ -170,7 +170,7 @@ void LWaveUpProgress::paintEvent(QPaintEvent *event)
 
     this->drawValue (&painter);
 
-    //绘制百分比文字
+    //绘制百分比文字  
     painter.setPen (QColor(255,255,255));
     QFont font;
     font.setFamily ("Microsoft YaHei");
@@ -178,7 +178,7 @@ void LWaveUpProgress::paintEvent(QPaintEvent *event)
     font.setBold (true);
     painter.setFont (font);
 
-    //计算文字位置
+    //计算文字位置  
     int textWidth = this->width () / 2 - 45;
     int textHeight = this->height () / 2;
 

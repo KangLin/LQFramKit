@@ -1,0 +1,3 @@
+[submodule "LQ3rdparty/qzxing"]
+	path = LQ3rdparty/qzxing
+	url = https://github.com/ftylitak/qzxing.git

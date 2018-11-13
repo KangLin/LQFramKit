@@ -19,7 +19,7 @@ DEFINES +=DEBUG_OUT
 
 include($$PWD/demo/demo.pri)
 
-INCLUDEPATH +=$$PWD/../LQ3rdparty/QZXing/QZXing
+INCLUDEPATH +=$$PWD/../LQ3rdparty/QZXing/src
 INCLUDEPATH +=$$PWD/../LQTools/inc
 INCLUDEPATH +=$$PWD/../LQInstrumentation/inc
 INCLUDEPATH +=$$PWD/../LQFormWidget/inc
@@ -32,7 +32,7 @@ INCLUDEPATH +=$$PWD/demo
 
 
 
-DEPENDPATH  +=$$PWD/../LQ3rdparty/QZXing/QZXing
+DEPENDPATH  +=$$PWD/../LQ3rdparty/QZXing/src
 DEPENDPATH  +=$$PWD/../LQTools
 DEPENDPATH  +=$$PWD/../LQInstrumentation
 DEPENDPATH  +=$$PWD/../LQFormWidget

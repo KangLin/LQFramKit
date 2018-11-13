@@ -1,4 +1,4 @@
-#include "QZXing/inc/QZxingIncLib.h"
+#include "qzxing/src/QZXing.h"
 
 #include "demo_zxing.h"
 #include "ui_demo_zxing.h"
