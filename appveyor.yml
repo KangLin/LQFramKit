@@ -95,7 +95,7 @@ test_script:
    
 artifacts:
   - path: install
-    name: LQFramKit_$(BUILD_TARGERT)$(TOOLCHAIN_VERSION)_$(CONFIGURATION)_$(BUILD_VERSION)
+    name: LQFramKit_$(QMAKE_XSPEC)$(TOOLCHAIN_VERSION)_$(CONFIGURATION)_$(BUILD_VERSION)
     type: zip
 
 # whitelist branches to avoid testing feature branches twice (as branch and as pull request)
